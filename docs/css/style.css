@@ -18,21 +18,6 @@ html > body {
   overflow-x: hidden;
 }
 
-/* 너비가 640px 이하 */
-@media (width <= 640px) {
-  .pc-top-bar,
-  .pc-about {
-    display: none;
-  }
-}
-/* 너비가 640px 이상 */
-@media (width >= 640px) {
-  .mobile-top-bar,
-  .mobile-side-bar,
-  .mobile-about {
-    display: none;
-  }
-}
 /* 커스텀 */
 :root {
   --g-color-black: #000;
@@ -62,15 +47,18 @@ a {
   text-decoration: none;
 }
 
+/* 너비가 640px 이하 */
 @media (width <= 640px) {
   .pc-top-bar,
   .pc-banner-box-type,
   .pc-banner-box-type-3,
   .pc-banner-box-type-4,
+  .pc-about,
   .pc-bottom-bar,
   .pc-side-bar {
     display: none;
     overflow-x: hidden;
+    min-width: 320px;
   }
 }
 /* 너비가 640px 이상 */
@@ -79,6 +67,7 @@ a {
   .mobile-banner-box-type,
   .mobile-banner-box-type-3,
   .mobile-banner-box-type-4,
+  .mobile-about,
   .mobile-bottom-bar,
   .mobile-side-bar {
     display: none;
