@@ -1,0 +1,749 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+html.pc-side-bar-actived,
+html.pc-side-bar-actived > body {
+    overflow: hidden;
+}
+html.mobile-side-bar-actived,
+html.mobile-side-bar-actived > body {
+    overflow: hidden;
+}
+html > body {
+    font-family: "Open Sans", sans-serif;
+    color: var(--g-color-black);
+    background-color: var(--g-color-white);
+    font-size: 0.9rem;
+    overflow-x: hidden;
+}
+
+/* 너비가 640px 이하 */
+@media (width <= 640px) {
+    .pc-top-bar,
+    .pc-about {
+        display: none;
+    }
+}
+/* 너비가 640px 이상 */
+@media (width >= 640px) {
+    .mobile-top-bar,
+    .mobile-side-bar,
+    .mobile-about {
+        display: none;
+    }
+}
+
+/* 커스텀 */
+:root {
+    --g-color-black: #000;
+    --g-color-white: #fff;
+    --min-width: 320px;
+}
+
+.con {
+    max-width: 1313px;
+    padding: 0 10px;
+}
+.mobile-con {
+    max-width: 640px;
+    padding: 0 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+@media (width <= 640px) {
+    .pc-top-bar,
+    .pc-banner-box-type,
+    .pc-banner-box-type-3,
+    .pc-banner-box-type-4,
+    .pc-bottom-bar,
+    .pc-side-bar {
+        display: none;
+        overflow-x: hidden;
+    }
+}
+/* 너비가 640px 이상 */
+@media (width >= 640px) {
+    .mobile-top-bar,
+    .mobile-banner-box-type,
+    .mobile-banner-box-type-3,
+    .mobile-banner-box-type-4,
+    .mobile-bottom-bar,
+    .mobile-side-bar {
+        display: none;
+    }
+}
+/* pc 탑바 구현 시작 */
+
+.pc-top-bar,
+.mobile-top-bar {
+    z-index: 100;
+}
+// 텍스트 공통 애니메이션 시작
+.animated {
+    &__text {
+        span {
+            display: block;
+            // border: 1px solid red;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            line-height: 1rem;
+            position: relative;
+
+            &:after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                height: 0.5px;
+                background-color: black;
+                transition: width 0.2s;
+            }
+        }
+    }
+}
+
+.animated__text:hover > a > span::after {
+    width: 0;
+}
+
+// 텍스트 공통 애니메이션 끝
+
+.menu-wrap > nav > ul > li > span {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+/* pc 탑바 구현 끝 */
+/* mobile 탑바 구현 시작 */
+
+.mobile-top-bar {
+    min-width: 320px;
+    max-width: 640px;
+
+    .menu-wrap {
+        span {
+            width: 14px;
+        }
+    }
+}
+
+/* mobile 탑바 구현 끝 */
+/* 쇼핑백 팝업 구현 시작 */
+
+.popup {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 200;
+}
+
+.popup.active {
+    display: block;
+}
+
+.popup > .popup__content {
+    background-color: black;
+    min-width: 400px;
+    min-height: 80px;
+    top: 80%;
+    left: 10px;
+    border-radius: 5px;
+    // transform: translatex(-50%);
+    // transition: transform .5s;
+}
+// .popup > .popup__content.active {
+//     transform: translatex(0);
+//     animation-play-state: paused;
+// }
+
+.popup__body > .popup-con {
+    padding: 0 15px;
+}
+
+/* 쇼핑백 팝업 구현 끝 */
+/* pc 사이드바 구현 시작 */
+// 사이드바 공통 디자인
+.side-bar {
+    transition: opacity 1s, visibility 1s;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    &__content {
+        transform: translateX(100%);
+        transition: transform 0.5s;
+        min-width: 480px;
+    }
+    &__btn-close {
+        background-color: black;
+        border-radius: 30px;
+        transition: scale 0.3s;
+
+        &:hover {
+            scale: 0.9;
+        }
+        div {
+            top: 50%;
+            left: 25%;
+            height: 0.5px;
+            width: 50%;
+            background-color: white;
+            transform: rotate(-45deg);
+            &:last-child {
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
+
+.side-bar.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 100;
+}
+
+.side-bar.active .side-bar__content {
+    transform: translateX(0);
+}
+
+/* pc 사이드바 메뉴 구현 시작 */
+.pc-menu-box-1 li:first-child > a,
+.mobile-menu-box-1 li:first-child > a {
+    font-family: "Malgun Gothic";
+}
+
+.menu-box-1__bottom-list span {
+    display: block;
+    margin-left: 0;
+}
+
+/* 사이드바 공통 밑줄 애니메이션 끝 */
+.menu-box-1 {
+    display: flex;
+    flex-direction: column;
+}
+.menu-box-1 ul {
+    overflow-x: hidden;
+    padding-left: 30px;
+}
+
+.menu-box-1 > ul ul {
+    transform: translatex(100%);
+    visibility: hidden;
+    position: absolute;
+    overflow-x: hidden;
+    transition: transform 0s, visibility 0s cubic-bezier(0.5, 0, 0, 1) 0s;
+    flex-grow: 1;
+}
+
+.menu-box-1 ul > li.active > ul {
+    width: 100%;
+    height: 700px;
+    top: 0;
+    left: 0;
+    visibility: visible;
+    transform: translatex(0);
+    background-color: white;
+}
+
+/* n차 텍스트 */
+.menu-box-1 ul > li > a {
+    display: block;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 2rem;
+}
+/* 2차 메뉴 텍스트 */
+.menu-box-1 > ul ul > li > a {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1rem;
+    margin: 10px 0;
+}
+.menu-box-1 > ul ul ul > li > a {
+    margin: 20px 0;
+}
+.prev-menu-page {
+    padding: 10px;
+    &:hover {
+        .prev-menu-page__text {
+            &:after {
+                width: 0;
+            }
+        }
+    }
+}
+.prev-menu-page__text {
+    font-weight: 700;
+    font-size: 0.7rem;
+    position: relative;
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        height: 0.5px;
+        background-color: black;
+        transition: width 0.2s;
+    }
+}
+
+.side-bar__body > .menu-box-1 .next-arrow {
+    transform: translatex(-20%);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.side-bar__body > .menu-box-1 ul > li:hover > .next-arrow {
+    transform: translatex(0);
+    opacity: 1;
+}
+
+/* pc 사이드바 메뉴 구현 끝 */
+
+/* pc 사이드바 구현 끝 */
+/* 모바일 사이드바 구현 시작 */
+
+.mobile-side-bar__content,
+.mobile-side-bar__body {
+    max-width: 400px;
+    min-width: 320px;
+    overflow-x: hidden;
+}
+.mobile-menu-box-1 > ul {
+    overflow-x: hidden;
+}
+/* 메인 구현 시작 */
+.pc-banner-box-type {
+    .main-img-box {
+        overflow-x: hidden;
+    }
+    img {
+        display: block;
+        max-width: 800px;
+        max-height: 1067px;
+    }
+}
+.mobile-banner-box-type {
+    overflow-x: hidden;
+    
+    .section-con {
+        min-width: 320px;
+        padding: 0 10px;
+    }
+}
+
+/* 메인 구현 끝 */
+/* 공통 버튼 구현 시작 */
+
+.collection-btn > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    font-size: 0.7rem;
+    width: 134px;
+    height: 48px;
+    border-radius: 2px;
+    transform: translatey(100%);
+    opacity: 0%;
+    transition: transform 1s, opacity 1s, scale 0.3s;
+    &:hover {
+        scale: 0.98;
+    }
+}
+
+.collection-btn > a.active {
+    opacity: 1;
+    transform: translatey(0);
+}
+
+/* 공통 컬렉션 텍스트 구현 시작 */
+
+.cont-box .main-text {
+    transition: transform 1s, opacity 1s;
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.cont-box .main-text.active {
+    opacity: 1;
+    transform: translatey(0%);
+}
+/* 공통 메인 텍스트 구현 끝 */
+
+.mobile-banner-box-type .main-text {
+    font-size: 1.75rem;
+}
+/* 메인 스와이퍼 구현 시작 */
+.pc-swiper {
+    overflow: hidden;
+
+    @media (width <= 786px) {
+        display: none;
+    }
+    .swipeslide {
+        max-width: 100%;
+        overflow-x: hidden;
+        &__slide {
+            img {
+                min-width: 300px;
+                min-height: 300px;
+                padding: 50px;
+            }
+        }
+    }
+    .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 500px;
+        max-height: 500px;
+        background-color: rgb(231, 231, 231);
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(231, 231, 231);
+            opacity: 0;
+            z-index: -1;
+            transition: all 0.3s;
+        }
+    }
+    .swiper-menu-name {
+        top: 90%;
+        font-size: 0.9rem;
+        letter-spacing: 0.03em;
+        line-height: 1.5rem;
+        font-weight: bold;
+    }
+    .swipeslide-btn {
+        position: absolute;
+        min-width: 660px;
+        min-height: 100%;
+        left: 50%;
+        top: 60%;
+        z-index: 50;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__arrow {
+            display: flex;
+            width: 100%;
+
+            .arrow__btn-prev {
+                .arrow-left-leg {
+                    transition: transform 0.3s;
+                }
+            }
+            .arrow__btn-next {
+                position: absolute;
+                right: 0;
+                .arrow-right-leg {
+                    transform-origin: right center;
+                    transition: transform 0.3s;
+                }
+            }
+        }
+    }
+}
+
+.pc-swiper .swiper-slide.off:before {
+    opacity: 0.4;
+    z-index: 10;
+}
+
+.go-collection {
+    // position: relative;
+    display: inline-block;
+
+    span {
+        font-size: 1.25rem;
+        padding: 5px 0;
+
+        @media screen and (max-width: 640px) {
+            font-size: 1.1rem;
+        }
+    }
+}
+/* 스와이퍼 버튼 구현 시작 */
+.pc-swiper > .banner-box-type-2 > div {
+    position: relative;
+}
+
+.arrow__btn-prev:hover .arrow-left-leg,
+.arrow__btn-next:hover .arrow-right-leg {
+    transform: scalex(0.6);
+}
+/* 스와이퍼 버튼 구현 끝*/
+
+/* mobile 스와이퍼 구현 시작  */
+.mobile-swiper {
+    @media (width >= 786px) {
+        display: none;
+    }
+    .cont-box a {
+        font-size: 1.1rem;
+    }
+    .slide-list {
+        max-width: 786px;
+        overflow-x: hidden;
+        padding: 0;
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 400px;
+            max-height: 400px;
+            background-color: rgb(231, 231, 231);
+            &:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgb(231, 231, 231);
+                opacity: 0;
+                z-index: -1;
+                transition: all 0.3s;
+            }
+            img {
+                min-width: 250px;
+                min-height: 250px;
+                padding: 50px;
+            }
+        }
+    }
+    .swiper-menu-name {
+        top: 90%;
+        font-size: 0.9rem;
+        letter-spacing: 0.03em;
+        line-height: 1.5rem;
+        font-weight: bold;
+    }
+}
+
+.mobile-swiper .slide-list .swiper-slide.off:before {
+    opacity: 0.4;
+    z-index: 10;
+}
+
+/* 메인 스와이퍼 구현 끝 */
+/* 배너3 구현 시작 */
+.banner-box-type-3 {
+    .cont-box {
+        position: relative;
+        max-width: 100%;
+
+        &__text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 40%;
+            left: 0;
+
+            .collection-btn {
+                a {
+                    background-color: white;
+                    color: black;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+/* 모바일 배너3 구현 시작 */
+.mobile-banner-box-type-3 {
+    min-width: 320px;
+    overflow: hidden;
+
+    .cont-box {
+        margin-top: 100px;
+
+        &__text {
+            top: 40%;
+            .main-text {
+                font-size: 1.75rem;
+            }
+        }
+    }
+}
+
+/* 모바일 배너3 구현 끝 */
+/* 배너3 구현 끝 */
+/* 배너4구현 시작 */
+// .pc-banner-box-type-4 .banner-box-type > .con > div:first-child {
+//     width: 55%;
+// }
+
+// .pc-banner-box-type-4 .banner-box-type > .con > div:last-child {
+//     width: 45%;
+// }
+.pc-banner-box-type-4 {
+    .img-box {
+        display: block;
+        margin-left: 10px;
+        width: 55%;
+
+        img {
+            display: block;
+            max-height: 740px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    .cont-wrap {
+        opacity: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        min-width: 320px;
+        transition: opacity 1s;
+        width: 45%;
+        .animated {
+            display: inline-block;
+        }
+    }
+}
+
+.pc-banner-box-type-4 .banner-box-type > .con > .cont-wrap.active {
+    opacity: 1;
+}
+
+.banner-box-type-4 .img-box {
+    z-index: -5;
+}
+
+/* 배너4 구현 끝 */
+/* 모바일 배너4 구현 시작 */
+.mobile-banner-box-type-4 {
+    min-width: 320px;
+    overflow-x: hidden;
+    
+    .cont-box {
+        min-width: 320px;
+        opacity: 0;
+        transition: opacity 1s;
+        .animated {
+            display: inline-block;
+        }
+    }
+}
+.mobile-banner-box-type-4 .banner-box-type .cont-box.active {
+    opacity: 1;
+}
+
+/* 모바일 배너4 구현 끝 */
+
+/* 배너 구현 끝 */
+/* 하단바 리스트1 구현 시작 */
+.bottom-bar__content-first {
+    .content-first__box-1 {
+        flex: 1 1 0;
+    }
+    .content-first__box-2 {
+        flex: 1 1 0;
+    }
+    .content-first__box-3 {
+        flex: 2 1 0;
+        .search-box-border {
+            background-color: #afafaf;
+            height: 0.3px;
+        }
+        .search-box__arrow {
+            margin-left: auto;
+        }
+    }
+}
+
+.bottom-bar > .con > .content-first__box-1 > div {
+    top: 0;
+    left: 0;
+}
+
+.bottom-bar > .con > .content-first__box-1 > div:last-child {
+    top: 50%;
+}
+.bottom-bar__content-first,
+.bottom-bar__content-second,
+.bottom-bar__content-third {
+    padding: 0 10px;
+}
+/* 하단바 텍스트 구현 시작*/
+
+.bottom-bar nav > ul > li > a {
+    display: block;
+    padding: 10px 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1rem;
+}
+
+.nation > ul > li > a {
+    font-weight: 700;
+}
+
+.bottom-bar nav > ul > li > a > span {
+    display: inline-block;
+    &:after {
+        background-color: white;
+    }
+}
+
+/* 하단바 텍스트 구현 끝*/
+/* 하단바 리스트1 구현 끝 */
+
+/* 하단바 리스트2 구현 시작 */
+.bottom-bar__content-second {
+    .second__img {
+        opacity: 0.7;
+        transition: opacity 0.5s;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    .content-second__text {
+        p {
+            display: block;
+            padding: 4px 0;
+            font-size: 0.7rem;
+        }
+    }
+}
+
+/* 하단바 리스트2 구현 끝 */
+// 하단바 서치박스
+input {
+    width: 100%;
+    background-color: black;
+    &:focus {
+        outline: none;
+    }
+}
+
+/* 모바일 하단바 구현 시작 */
+.mobile-bottom-bar {
+    min-width: 320px;
+}
+/* 모바일 하단바 구현 끝 */
